@@ -9,7 +9,7 @@ rs.initiate(
    {
 EOT
 
-echo "_id: \"$SHARD_NAME\"," >> /init-shard.js
+echo "_id: \"$SHARD_REPLICA_SET\"," >> /init-shard.js
 
 cat <<EOT >> /init-shard.js
       version: 1,

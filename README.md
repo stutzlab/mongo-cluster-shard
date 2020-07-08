@@ -8,6 +8,6 @@ This is meant to be used along with [http://github.com/stutzlab/mongo-cluster-co
 
 ## ENVs
 
-* SHARD_NAME - name of the shard
-* SHARD_NODES - hostname of shards that are part of shard defined in $SHARD_NAME
+* SHARD_REPLICA_SET - name of the shard
+* SHARD_SERVER_NODES - hostname of shards that are part of shard defined in $SHARD_NAME
 

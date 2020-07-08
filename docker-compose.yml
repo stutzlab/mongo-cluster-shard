@@ -6,8 +6,8 @@ services:
     build: .
     image: stutzlab/mongo-cluster-shard
     environment:
-      - SHARD_NAME=shard1
-      - SHARD_NODES=shard1-a
+      - SHARD_REPLICA_SET=shard1
+      - SHARD_SERVER_NODES=shard1-a,shard1-b
     ports:
       - 27511:27017
 
@@ -15,7 +15,7 @@ services:
     build: .
     image: stutzlab/mongo-cluster-shard
     environment:
-      - SHARD_NAME=shard1
-      - SHARD_NODES=shard1-b
+      - SHARD_REPLICA_SET=shard1
+      - SHARD_SERVER_NODES=shard1-a,shard1-b
     ports:
       - 27512:27017
