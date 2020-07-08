@@ -1,0 +1,21 @@
+version: '3.5'
+
+services:
+
+  shard1-a:
+    build: .
+    image: stutzlab/mongo-cluster-shard
+    environment:
+      - SHARD_NAME=shard1
+      - SHARD_NODES=shard1-a
+    ports:
+      - 27511:27017
+
+  shard1-b:
+    build: .
+    image: stutzlab/mongo-cluster-shard
+    environment:
+      - SHARD_NAME=shard1
+      - SHARD_NODES=shard1-b
+    ports:
+      - 27512:27017
