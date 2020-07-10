@@ -3,6 +3,11 @@
 set -e
 # set -x
 
+if [ "$SHARD_REPLICA_SET" == "" ]; then
+    echo "SHARD_REPLICA_SET is required"
+    exit 1
+fi
+
 /config.sh &
 
 echo "Starting Mongo shard node..."

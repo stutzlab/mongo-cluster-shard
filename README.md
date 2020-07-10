@@ -8,6 +8,5 @@ This is meant to be used along with [http://github.com/stutzlab/mongo-cluster-co
 
 ## ENVs
 
-* SHARD_REPLICA_SET - name of the shard
-* SHARD_SERVER_NODES - hostname of shards that are part of shard defined in $SHARD_NAME
-
+* SHARD_REPLICA_SET - name of the shard replica set
+* INIT_SHARD_NODES - if defined, will try to initialize this shard adding those nodes as initial shard nodes. Important: place this configuration only in one shard node.

@@ -2,20 +2,28 @@ version: '3.5'
 
 services:
 
-  shard1-a:
+  shard1a:
     build: .
     image: stutzlab/mongo-cluster-shard
     environment:
       - SHARD_REPLICA_SET=shard1
-      - SHARD_SERVER_NODES=shard1-a,shard1-b
-    ports:
-      - 27511:27017
+      - INIT_SHARD_NODES=shard1a,shard1b,shard1c
 
-  shard1-b:
+  shard1b:
     build: .
     image: stutzlab/mongo-cluster-shard
     environment:
       - SHARD_REPLICA_SET=shard1
-      - SHARD_SERVER_NODES=shard1-a,shard1-b
-    ports:
-      - 27512:27017
+
+  shard1c:
+    build: .
+    image: stutzlab/mongo-cluster-shard
+    environment:
+      - SHARD_REPLICA_SET=shard1
+
+  shard1d:
+    build: .
+    image: stutzlab/mongo-cluster-shard
+    environment:
+      - SHARD_REPLICA_SET=shard1
+    

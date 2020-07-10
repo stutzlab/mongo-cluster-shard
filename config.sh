@@ -1,6 +1,35 @@
 #!/bin/bash
 
-echo "Generating shard config"
+echo "Waiting for mongo server to be available at 27017..."
+while ! nc -z 127.0.0.1 27017; do sleep 0.5; done
+sleep 1
+
+MAX_RETRIES=9999
+if [ "$INIT_SHARD_NODES" != "" ]; then
+   MAX_RETRIES=5
+fi
+
+echo "Verifying if this shard node is already part of a shard..."
+C=0
+while (( "$C" < "$MAX_RETRIES" )); do
+   RS_FIND=$(mongo --eval "db.isMaster()" | grep shard1)
+   if [ "$?" == "0" ]; then
+      mongo --eval "db.isMaster()"
+      echo ">>> THIS NODE IS PART OF A SHARD REPLICASET"
+      exit 0
+   fi
+   C=($C+1)
+   echo "."
+   sleep 1
+done
+
+if [ "$INIT_SHARD_NODES" == "" ]; then
+  echo ">>> THIS NODE IS NOT PART OF A SHARD. ADD IT IN ORDER TO BE ACTIVE"
+  echo "Tip: On master node, execute rs.add( { host: \"[host]\", priority: 0, votes: 0 } )"
+  exit 0
+fi
+
+echo "Generating initial shard config"
 echo ""
 
 rm /init-shard.js
@@ -16,7 +45,7 @@ cat <<EOT >> /init-shard.js
       members: [
 EOT
 
-IFS=',' read -r -a NODES <<< "$SHARD_NODES"
+IFS=',' read -r -a NODES <<< "$INIT_SHARD_NODES"
 S=""
 c=0
 for N in "${NODES[@]}"; do
@@ -34,11 +63,7 @@ EOT
 echo "/init-shard.js"
 cat /init-shard.js
 
-echo "Waiting for local server to be available at 27017..."
-while ! nc -z 127.0.0.1 27017; do sleep 0.5; done
-sleep 3
-
-echo "CONFIGURING CLUSTER SHARD..."
+echo "INITIALIZING NEW SHARD..."
 mongo < /init-shard.js
-echo "CONFIGURATION OK"
+echo ">>> NEW SHARD INITIALIZED SUCCESSFULLY"
 
