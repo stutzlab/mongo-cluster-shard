@@ -2,6 +2,7 @@
 
 echo "Waiting for mongo server to be available at 27017..."
 while ! nc -z 127.0.0.1 27017; do sleep 0.5; done
+echo "Mongo OK"
 sleep 1
 
 MAX_RETRIES=9999
@@ -57,8 +58,8 @@ for N in "${NODES[@]}"; do
    c=$((c+1))
    echo " - Waiting for host $N to be available..."
    until ping -c1 $N >/dev/null; do sleep 2; done
-   echo " - Host available. Waiting port 27017..."
-   while ! nc -z $N 27017; do sleep 1; done
+   # echo " - Host available. Waiting port 27017..."
+   # while ! nc -z $N 27017; do sleep 1; done
    echo " - Host $N OK"
 done
 

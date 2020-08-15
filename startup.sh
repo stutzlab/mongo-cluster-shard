@@ -10,5 +10,5 @@ fi
 
 /config.sh &
 
-echo "Starting Mongo shard node..."
+echo ">>> Starting Mongo shard node..."
 mongod --port 27017 --shardsvr --replSet $SHARD_REPLICA_SET --bind_ip_all --dbpath /data
