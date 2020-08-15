@@ -13,7 +13,7 @@ deepCheck() {
     fi
 
     #check that this node appears in nodes list
-    V=$(mongo --eval "db.isMaster()" | grep $)
+    V=$(mongo --eval "db.isMaster()" | grep $1)
     echo $?
 }
 
