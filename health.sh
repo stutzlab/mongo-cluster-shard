@@ -1,16 +1,20 @@
 #!/bin/sh
 
-function deepCheck() {
+deepCheck() {
     #check for replica set status
     R=$(echo 'rs.status().ok' | mongo localhost:27017/test --quiet)
-    echo $R | grep 1
-    if [ "$?" == "1" ]; then
-        return 1
+    if [ "$?" != "0" ]; then
+        echo "1"
+        return
+    fi
+    if [ "$R" != "1" ]; then
+        echo "1"
+        return
     fi
 
     #check that this node appears in nodes list
-    mongo --eval "db.isMaster()" | grep $1
-    return $?
+    V=$(mongo --eval "db.isMaster()" | grep $)
+    echo $?
 }
 
 set -e
@@ -18,15 +22,16 @@ nc -z 127.0.0.1 27017
 set +e
 
 if [ ! -f "/data/__initialized" ]; then
-    echo "Node not initialized yet"
+    echo "Service is up. replicaset not initialized yet"
     R=$(deepCheck $SHARD_REPLICA_SET)
     if [ "$R" = "0" ]; then
+        echo "Marking this as initialized"
         touch /data/__initialized
     fi
     exit 0
 fi
 
-echo "Node already initialized. make deep check"
+echo "Service is up. replicaset initialized. making deep check"
 R=$(deepCheck $SHARD_REPLICA_SET)
 exit $R
 
