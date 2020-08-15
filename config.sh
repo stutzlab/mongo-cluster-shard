@@ -56,6 +56,7 @@ for N in "${NODES[@]}"; do
    c=$((c+1))
    echo "Waiting for host $N to be available..."
    until ping -c1 $N >/dev/null; do sleep 2; done
+   while ! nc -z $N 27017; do sleep 1; done
 done
 
 cat <<EOT >> /init-shard.js
