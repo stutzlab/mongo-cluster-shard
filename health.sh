@@ -4,17 +4,13 @@ function deepCheck() {
     #check for replica set status
     R=$(echo 'rs.status().ok' | mongo localhost:27017/test --quiet)
     echo $R | grep 1
-    if [ "$?" == "0" ]; then
-        return 0
+    if [ "$?" == "1" ]; then
+        return 1
     fi
 
     #check that this node appears in nodes list
     mongo --eval "db.isMaster()" | grep $1
-    if [ "$?" == "0" ]; then
-        return 0
-    fi
-
-    return 1
+    return $?
 }
 
 set -e
