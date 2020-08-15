@@ -18,7 +18,9 @@ while (( "$C" < "$MAX_RETRIES" )); do
       echo ">>> THIS NODE IS PART OF A SHARD REPLICASET"
       exit 0
    fi
-   C=($C+1)
+   if [ "$MAX_RETRIES" != "9999" ]; then
+     C=($C+1)
+   fi
    echo "."
    sleep 1
 done

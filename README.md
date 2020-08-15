@@ -13,4 +13,4 @@ This is meant to be used along with [http://github.com/stutzlab/mongo-cluster-co
 
 ## Volumes
 
-* Mount volumes at "/data/db". DON'T map at "/data" because there exists an /data/db volume that will be created for the instance if not declared explicitly!
+* Mount volumes at "/data".

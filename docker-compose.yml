@@ -21,9 +21,9 @@ services:
     environment:
       - SHARD_REPLICA_SET=shard1
 
-  shard1d:
-    build: .
-    image: stutzlab/mongo-cluster-shard
-    environment:
-      - SHARD_REPLICA_SET=shard1
+  # shard1d:
+  #   build: .
+  #   image: stutzlab/mongo-cluster-shard
+  #   environment:
+  #     - SHARD_REPLICA_SET=shard1
     
