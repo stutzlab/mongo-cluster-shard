@@ -51,10 +51,11 @@ IFS=',' read -r -a NODES <<< "$INIT_SHARD_NODES"
 S=""
 c=0
 for N in "${NODES[@]}"; do
+   echo " - $N"
    echo "${S}{ _id: $c, host : \"$N:27017\"}" >> /init-shard.js
    S=","
    c=$((c+1))
-   echo "Waiting for host $N to be available..."
+   echo " - Waiting for host $N to be available..."
    until ping -c1 $N >/dev/null; do sleep 2; done
    while ! nc -z $N 27017; do sleep 1; done
 done
