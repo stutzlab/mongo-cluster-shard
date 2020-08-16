@@ -9,8 +9,6 @@ ADD /startup.sh /
 ADD /health.sh /
 ADD /config.sh /
 
-HEALTHCHECK CMD [ "/health.sh" ]
-
 VOLUME [ "/data" ]
 
 EXPOSE 27017
