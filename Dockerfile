@@ -4,6 +4,7 @@ RUN apt-get update && apt-get install -y netcat inetutils-ping
 
 ENV SHARD_REPLICA_SET ''
 ENV INIT_SHARD_NODES ''
+ENV AUTH_ENABLE 'true'
 
 ADD /startup.sh /
 ADD /health.sh /

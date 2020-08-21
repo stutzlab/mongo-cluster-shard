@@ -8,22 +8,24 @@ services:
     environment:
       - SHARD_REPLICA_SET=shard1
       - INIT_SHARD_NODES=shard1a,shard1b,shard1c
+      - AUTH_ENABLE=false
 
   shard1b:
     build: .
     image: stutzlab/mongo-cluster-shard
     environment:
       - SHARD_REPLICA_SET=shard1
+      - AUTH_ENABLE=false
 
   shard1c:
     build: .
     image: stutzlab/mongo-cluster-shard
     environment:
       - SHARD_REPLICA_SET=shard1
+      - AUTH_ENABLE=false
 
   # shard1d:
   #   build: .
   #   image: stutzlab/mongo-cluster-shard
   #   environment:
   #     - SHARD_REPLICA_SET=shard1
-    
