@@ -10,7 +10,7 @@ This is meant to be used along with [http://github.com/stutzlab/mongo-cluster-co
 
 * SHARD_REPLICA_SET - name of the shard replica set
 * INIT_SHARD_NODES - if defined, will try to initialize this shard adding those nodes as initial shard nodes. Important: place this configuration only in one shard node.
-* AUTH_ENABLE - only allow connections from authenticated users (even through mongos router). default to true.
+* SHARED_KEY_SECRET - secret name with shared key. defaults to '', which will run with no keyfile
 
 ## Volumes
 
