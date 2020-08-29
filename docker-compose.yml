@@ -1,4 +1,4 @@
-version: '3.5'
+version: '2'
 
 services:
 
@@ -8,6 +8,7 @@ services:
     environment:
       - SHARD_REPLICA_SET=shard1
       - INIT_SHARD_NODES=shard1a,shard1b,shard1c
+    mem_limit: 3000M
 
   shard1b:
     build: .
