@@ -1,6 +1,6 @@
 FROM mongo:4.4.0-bionic
 
-RUN apt-get update && apt-get install -y netcat inetutils-ping cgroup-bin
+RUN apt-get update && apt-get install -y netcat inetutils-ping
 
 ENV SHARD_REPLICA_SET ''
 ENV INIT_SHARD_NODES ''
